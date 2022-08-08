@@ -1,0 +1,4 @@
+  - platform: template
+    name: "${uppername} Uptime"
+    id: "${lowername}_uptime"
+    icon: mdi:clock-start

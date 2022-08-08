@@ -1,0 +1,79 @@
+substitutions:
+  name: p1-h2o-logger
+  uppername: P1 H2O Logger
+  lowername: p1_h2o_logger
+  version: '1.0'
+
+packages:
+  device_base: !include common/device_base.yaml
+  wifi: !include common/wifi.yaml
+
+esp8266:
+  board: d1_mini
+
+ota:
+  password: "e59c9e1ab5296a59f19dbc309aa6a724"
+
+# Button to reset total pulse count
+button:
+  - platform: template
+    name: 'Waterverbruik liter set total'
+    on_press:
+      then:
+        - pulse_meter.set_total_pulses:
+            id: ${lowername}_pulse_meter
+            value: 1378449
+      
+# DHT sensors, GPIO 4
+sensor:
+  - platform: dht
+    model: DHT11
+    pin: 
+      number: 4
+      mode: INPUT_PULLUP
+    temperature:
+      name: ${name}_temp
+    humidity:
+      name: ${name}_hum
+    update_interval: 30s
+    
+    
+  # # Water pulse counter
+  # - platform: pulse_counter
+  #   id: h2o_pulse_counter
+  #   name: "Water verbruik"
+  #   pin:
+  #     number: 14
+  #     mode: INPUT_PULLUP
+  #   internal_filter: 10ms
+  #   unit_of_measurement: 'l/min'
+  #   accuracy_decimals: 1
+  #   filters:
+  #     - multiply: 0.5
+  #   total:
+  #     name: 'Water totaal verbruikt'
+  #     unit_of_measurement: 'l'
+  #     accuracy_decimals: 1
+  #     filters:
+  #       - multiply: 0.5 # 2 puls/l
+
+  # Water meter
+  - platform: pulse_meter
+    id: ${lowername}_pulse_meter
+    pin:
+      number: 14
+      mode: INPUT_PULLUP
+    internal_filter: 10ms
+    name: "Waterverbruik liters"
+    icon: "mdi:water"
+    unit_of_measurement: 'l/min'
+    accuracy_decimals: 1
+    filters:
+      # 4-digit = 1 pulse per 0.5L | https://www.2-wire.net/wp-content/uploads/2019/01/S02-Elster-manual.pdf
+      - multiply: 0.5
+    total:
+      name: 'Water meterstand'
+      unit_of_measurement: 'm3'
+      accuracy_decimals: 3
+      filters:
+        - multiply: 0.0005 # 2000 puls/m3

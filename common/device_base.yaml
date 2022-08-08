@@ -1,0 +1,38 @@
+esphome:
+  # This will allow for (future) project identification,
+  # configuration and updates.
+  project:
+    name: "tiwu.${name}"
+    version: "${version}"
+
+  name: "${name}"
+  # Automatically add the mac address to the name
+  # so you can use a single firmware for all devices
+  #name_add_mac_suffix: true
+  build_path: ./build/${name}
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+captive_portal:
+
+# Text sensors with general information
+text_sensor:
+  - <<: !include text_sensor/uptime.config.yaml
+  - <<: !include text_sensor/wifi_info.config.yaml
+      
+# Restart device remotely
+switch:
+  - <<: !include switch/restart.config.yaml
+
+# WiFi Signal + Uptime sensor
+sensor:
+  - <<: !include sensor/uptime.config.yaml
+  - <<: !include sensor/wifi_signal.config.yaml
+
+# Connection Status
+binary_sensor:
+  - <<: !include binary_sensor/connection_status.config.yaml

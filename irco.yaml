@@ -1,0 +1,90 @@
+# These substitutions allow the end user to override certain values
+substitutions:
+  name: irco
+  uppername: Irco
+  lowername: irco
+  version: '1.0'
+
+packages:
+  device_base: !include common/device_base.yaml
+  wifi: !include common/wifi.yaml
+
+esp8266:
+  board: esp12e
+
+wifi:  
+  manual_ip:
+    static_ip: 192.168.0.105
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+ota:
+
+# control LED connected to ESP pwm 
+light:
+  - platform: monochromatic
+    name: irco_led
+    output: output_irco_led
+    effects:
+      - strobe:
+      - flicker:
+          alpha: 90%
+          intensity: 20%
+
+# ESP led PWM
+output:
+  - platform: esp8266_pwm
+    id: output_irco_led
+    pin: 2
+    inverted: true
+
+# IR receiver   
+remote_receiver:
+  pin: 
+    number: 14
+    inverted: true
+    mode: INPUT_PULLUP
+  dump: all
+  tolerance: 55%
+  id: ir_rcv
+
+  
+# Daikin Airco IR transmitter
+remote_transmitter:
+  pin: 
+    number: 12
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: daikin       # adjust to match your AC unit!
+    name: irco_ac
+    receiver_id: ir_rcv
+    visual:
+      min_temperature: 10 °C
+      max_temperature: 30 °C
+      temperature_step: 1 °C
+
+
+# DHT sensors, GPIO 4 & 5
+sensor:
+  - platform: dht
+    model: DHT11
+    pin: 
+      number: 4
+      mode: INPUT_PULLUP
+    temperature:
+      name: irco_dht01_temp
+    humidity:
+      name: irco_dht01_hum
+    update_interval: 30s
+  - platform: dht
+    model: DHT11
+    pin: 
+      number: 5
+      mode: INPUT_PULLUP
+    temperature:
+      name: irco_dht02_temp
+    humidity:
+      name: irco_dht02_hum
+    update_interval: 30s
+

@@ -1,0 +1,29 @@
+# These substitutions allow the end user to override certain values
+substitutions:
+  name: birdcam
+  uppername: BirdCam
+  lowername: birdcam
+  version: '1.1'
+
+  # settings for espcam package
+  resolution: 1024x768
+  vflip: 'false'
+  hflip: 'false'
+  effect: none   # grayscale/none
+
+packages:
+  device_base: !include common/device_base.yaml
+  wifi: !include common/wifi.yaml
+  cam: !include common/espcam.yaml
+
+esp32:
+  board: esp32cam
+
+ota:
+  password: "c6b7b20de01836079657380418dc76e8"
+
+wifi:  
+  manual_ip:
+    static_ip: 192.168.0.235
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0

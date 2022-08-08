@@ -1,0 +1,53 @@
+# camera setup
+# Note: Camera uses PWM timer #1. 
+#       If you need PWM (via the ledc platform) you need to manually specify a channel there (with the channel: 2 parameter)
+esp32_camera:
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+
+  # Image settings
+  name: "${uppername}"
+  resolution: ${resolution}
+  vertical_flip: ${vflip}
+  horizontal_mirror: ${hflip}
+  special_effect: ${effect}
+
+# separate web server for stream in motioneye
+esp32_camera_web_server:
+  - port: 8080
+    mode: stream
+    
+output:
+# ESP CAM flash
+  - platform: ledc
+    pin: GPIO4
+    id: gpio_4
+    channel: 2
+# ESP led
+  - platform: gpio
+    id: gpio_33
+    pin: 
+      number: GPIO33
+      inverted: true
+    
+light:
+  - platform: monochromatic
+    name: "${uppername} Flash"
+    output: gpio_4
+    effects:
+      - strobe:
+      - flicker:
+          alpha: 90%
+          intensity: 20%
+  - platform: binary
+    name: "${uppername} LED"
+    output: gpio_33

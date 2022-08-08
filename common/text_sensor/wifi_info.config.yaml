@@ -1,0 +1,9 @@
+  - platform: wifi_info
+    ip_address:
+      name: "${uppername} IP"
+    ssid:
+      name: "${uppername} SSID"
+    bssid:
+      name: "${uppername} BSSID"
+    mac_address:
+      name: "${uppername} MAC"

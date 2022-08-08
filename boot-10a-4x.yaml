@@ -1,0 +1,109 @@
+# These substitutions allow the end user to override certain values
+substitutions:
+  name: boot-10a-4x
+  uppername: Boot 10A 4x
+  lowername: boot_10a_4x
+  version: '1.0'
+
+packages:
+  device_base: !include common/device_base.yaml
+  wifi: !include common/wifi.yaml
+  
+esp8266:
+  board: esp12e
+  restore_from_flash: true
+
+ota:
+  password: "113ff3b1c01ed6a1565e725fa27c1a79"
+
+wifi:  
+  manual_ip:
+    static_ip: 192.168.0.247
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "${uppername} Button 1"
+    on_press:
+      then:
+        - switch.toggle: ry1
+  - platform: gpio
+    pin:
+      number: GPIO2
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "${uppername} Button 2"
+    on_press:
+      then:
+        - switch.toggle: ry2
+  - platform: gpio
+    pin:
+      number: GPIO3
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "${uppername} Button 3"
+    on_press:
+      then:
+        - switch.toggle: ry3
+  - platform: gpio
+    pin:
+      number: GPIO4
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "${uppername} Button 4"
+    on_press:
+      then:
+        - switch.toggle: ry4
+    
+switch:
+  - platform: gpio
+    name: "${uppername} Relay 1"
+    pin: GPIO16
+    id: ry1
+  - platform: gpio
+    name: "${uppername} Relay 2"
+    pin: GPIO14
+    id: ry2
+  - platform: gpio
+    name: "${uppername} Relay 3"
+    pin: GPIO12
+    id: ry3
+  - platform: gpio
+    name: "${uppername} Relay 4"
+    pin: GPIO13
+    id: ry4
+
+output:
+  # # onboard led
+  # - platform: gpio
+  #   id: onboard_led_pin
+  #   pin: GPIO02
+  #   inverted: true
+  # blue led
+  - platform: gpio
+    id: blue_led_pin
+    pin: GPIO05
+    inverted: true
+
+light:
+  # - platform: binary
+  #   name: "${uppername} Onboard LED"
+  #   output: onboard_led_pin
+  #   id: onboard_led
+  - platform: binary
+    name: "${uppername} Blue LED"
+    output: blue_led_pin
+    id: blue_led
