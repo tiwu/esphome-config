@@ -19,6 +19,10 @@ api:
 
 captive_portal:
 
+# Setup OTA
+ota:
+  password: !secret ota_password
+
 # Text sensors with general information
 text_sensor:
   - <<: !include text_sensor/uptime.config.yaml

@@ -18,7 +18,6 @@ wifi:
     gateway: 192.168.0.1
     subnet: 255.255.255.0
 
-ota:
 
 # control LED connected to ESP pwm 
 light:

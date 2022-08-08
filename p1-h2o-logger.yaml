@@ -11,9 +11,6 @@ packages:
 esp8266:
   board: d1_mini
 
-ota:
-  password: "e59c9e1ab5296a59f19dbc309aa6a724"
-
 # Button to reset total pulse count
 button:
   - platform: template
