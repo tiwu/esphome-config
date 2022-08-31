@@ -33,7 +33,7 @@ binary_sensor:
     name: "${uppername} Button 1"
     on_press:
       then:
-        - switch.toggle: ry1
+        - switch.toggle: ${lowername}_ry1
   - platform: gpio
     pin:
       number: GPIO2
@@ -44,7 +44,7 @@ binary_sensor:
     name: "${uppername} Button 2"
     on_press:
       then:
-        - switch.toggle: ry2
+        - switch.toggle: ${lowername}_ry2
   - platform: gpio
     pin:
       number: GPIO3
@@ -55,7 +55,7 @@ binary_sensor:
     name: "${uppername} Button 3"
     on_press:
       then:
-        - switch.toggle: ry3
+        - switch.toggle: ${lowername}_ry3
   - platform: gpio
     pin:
       number: GPIO4
@@ -66,25 +66,25 @@ binary_sensor:
     name: "${uppername} Button 4"
     on_press:
       then:
-        - switch.toggle: ry4
+        - switch.toggle: ${lowername}_ry4
     
 switch:
   - platform: gpio
     name: "${uppername} Relay 1"
     pin: GPIO16
-    id: ry1
+    id: ${lowername}_ry1
   - platform: gpio
     name: "${uppername} Relay 2"
     pin: GPIO14
-    id: ry2
+    id: ${lowername}_ry2
   - platform: gpio
     name: "${uppername} Relay 3"
     pin: GPIO12
-    id: ry3
+    id: ${lowername}_ry3
   - platform: gpio
     name: "${uppername} Relay 4"
     pin: GPIO13
-    id: ry4
+    id: ${lowername}_ry4
 
 output:
   # # onboard led
@@ -94,7 +94,7 @@ output:
   #   inverted: true
   # blue led
   - platform: gpio
-    id: blue_led_pin
+    id: ${lowername}_blue_led_pin
     pin: GPIO05
     inverted: true
 
@@ -105,5 +105,5 @@ light:
   #   id: onboard_led
   - platform: binary
     name: "${uppername} Blue LED"
-    output: blue_led_pin
-    id: blue_led
+    output: ${lowername}_blue_led_pin
+    id: ${lowername}_blue_led
