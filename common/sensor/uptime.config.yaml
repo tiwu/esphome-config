@@ -1,7 +1,7 @@
 
   - platform: uptime
     id: ${lowername}_uptime_s
-    update_interval: 90s
+    update_interval: 120s
     on_raw_value:
       then:
         - text_sensor.template.publish:
