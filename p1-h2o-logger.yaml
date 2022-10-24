@@ -47,7 +47,7 @@ button:
 sensor:
   - platform: homeassistant
     entity_id: input_number.watermeter_stand_input
-    accuracy_decimals: 3
+    accuracy_decimals: 4
     id: watermeter_input
 
 # DHT sensor, GPIO 4
@@ -80,10 +80,15 @@ sensor:
     total:
       name: 'Water meterstand'
       unit_of_measurement: 'm3'
-      accuracy_decimals: 3
+      accuracy_decimals: 4
       filters:
         # 2000 puls/m3
         - lambda: !lambda |-
             id(total_water) = x * 0.0005;
             ESP_LOGD("${lowername} water meterstand", "Meterstand: %f", id(total_water));
             return id(total_water);
+    on_raw_value:
+      then:
+        - logger.log: 
+            format: "pulse_meter counted  %.1f pulses"
+            args: [ 'x' ]
