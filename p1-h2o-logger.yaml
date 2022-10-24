@@ -8,59 +8,69 @@ packages:
   device_base: !include common/device_base.yaml
   wifi: !include common/wifi.yaml
 
+esphome:
+  on_boot:
+    then:
+      - pulse_meter.set_total_pulses:
+          id: ${lowername}_pulse_meter
+          value: !lambda return id(total_water).state * 2000;
+
+
 esp8266:
   board: d1_mini
+  restore_from_flash: true
 
-# Button to reset total pulse count
+preferences:
+  flash_write_interval: 20min
+
+globals:
+  - id: total_water
+    type: float
+    restore_value: true
+
+# Button to reset total pulse count from HA
 button:
   - platform: template
-    name: 'Waterverbruik liter set total'
+    name: 'Waterverbruik zet stand'
     on_press:
       then:
         - pulse_meter.set_total_pulses:
             id: ${lowername}_pulse_meter
-            value: 1378449
-      
-# DHT sensors, GPIO 4
+            value: !lambda return id(watermeter_input).state * 2000;
+  - platform: template
+    name: 'Save to Flash'
+    on_press:
+      then:
+        - lambda: !lambda global_preferences->sync();
+
+
+# read HA input sensor to set initial value
 sensor:
+  - platform: homeassistant
+    entity_id: input_number.watermeter_stand_input
+    accuracy_decimals: 3
+    id: watermeter_input
+
+# DHT sensor, GPIO 4
   - platform: dht
     model: DHT11
-    pin: 
+    pin:
       number: 4
       mode: INPUT_PULLUP
     temperature:
       name: ${name}_temp
     humidity:
       name: ${name}_hum
-    update_interval: 30s
-    
-    
-  # # Water pulse counter
-  # - platform: pulse_counter
-  #   id: h2o_pulse_counter
-  #   name: "Water verbruik"
-  #   pin:
-  #     number: 14
-  #     mode: INPUT_PULLUP
-  #   internal_filter: 10ms
-  #   unit_of_measurement: 'l/min'
-  #   accuracy_decimals: 1
-  #   filters:
-  #     - multiply: 0.5
-  #   total:
-  #     name: 'Water totaal verbruikt'
-  #     unit_of_measurement: 'l'
-  #     accuracy_decimals: 1
-  #     filters:
-  #       - multiply: 0.5 # 2 puls/l
+    update_interval: 60s
 
-  # Water meter
+# Water meter
   - platform: pulse_meter
     id: ${lowername}_pulse_meter
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 10ms
+    internal_filter: 50ms
+    timeout: 30s
     name: "Waterverbruik liters"
     icon: "mdi:water"
     unit_of_measurement: 'l/min'
@@ -73,4 +83,8 @@ sensor:
       unit_of_measurement: 'm3'
       accuracy_decimals: 3
       filters:
-        - multiply: 0.0005 # 2000 puls/m3
+        # 2000 puls/m3
+        - lambda: !lambda |-
+            id(total_water) = x * 0.0005;
+            ESP_LOGD("${lowername} water meterstand", "Meterstand: %f", id(total_water));
+            return id(total_water);
