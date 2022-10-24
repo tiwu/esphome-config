@@ -71,7 +71,7 @@ binary_sensor:
         input: true
       inverted: true
     name: "${uppername} Button 03"
-    
+
 switch:
   - platform: gpio
     name: "${uppername} Relay 1"

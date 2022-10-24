@@ -12,14 +12,13 @@ packages:
 esp8266:
   board: esp12e
 
-wifi:  
+wifi:
   manual_ip:
     static_ip: 192.168.0.105
     gateway: 192.168.0.1
     subnet: 255.255.255.0
 
-
-# control LED connected to ESP pwm 
+# control LED connected to ESP pwm
 light:
   - platform: monochromatic
     name: irco_led
@@ -37,9 +36,9 @@ output:
     pin: 2
     inverted: true
 
-# IR receiver   
+# IR receiver
 remote_receiver:
-  pin: 
+  pin:
     number: 14
     inverted: true
     mode: INPUT_PULLUP
@@ -47,10 +46,9 @@ remote_receiver:
   tolerance: 55%
   id: ir_rcv
 
-  
 # Daikin Airco IR transmitter
 remote_transmitter:
-  pin: 
+  pin:
     number: 12
   carrier_duty_percent: 50%
 
@@ -63,12 +61,11 @@ climate:
       max_temperature: 30 °C
       temperature_step: 1 °C
 
-
 # DHT sensors, GPIO 4 & 5
 sensor:
   - platform: dht
     model: DHT11
-    pin: 
+    pin:
       number: 4
       mode: INPUT_PULLUP
     temperature:
@@ -78,7 +75,7 @@ sensor:
     update_interval: 30s
   - platform: dht
     model: DHT11
-    pin: 
+    pin:
       number: 5
       mode: INPUT_PULLUP
     temperature:
@@ -86,4 +83,3 @@ sensor:
     humidity:
       name: irco_dht02_hum
     update_interval: 30s
-

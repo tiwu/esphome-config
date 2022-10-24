@@ -1,5 +1,5 @@
 # camera setup
-# Note: Camera uses PWM timer #1. 
+# Note: Camera uses PWM timer #1.
 #       If you need PWM (via the ledc platform) you need to manually specify a channel there (with the channel: 2 parameter)
 esp32_camera:
   external_clock:
@@ -25,7 +25,7 @@ esp32_camera:
 esp32_camera_web_server:
   - port: 8080
     mode: stream
-    
+
 output:
 # ESP CAM flash
   - platform: ledc
@@ -35,10 +35,10 @@ output:
 # ESP led
   - platform: gpio
     id: gpio_33
-    pin: 
+    pin:
       number: GPIO33
       inverted: true
-    
+
 light:
   - platform: monochromatic
     name: "${uppername} Flash"

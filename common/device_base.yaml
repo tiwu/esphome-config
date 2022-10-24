@@ -27,7 +27,7 @@ ota:
 text_sensor:
   - <<: !include text_sensor/uptime.config.yaml
   - <<: !include text_sensor/wifi_info.config.yaml
-      
+
 # Restart device remotely
 switch:
   - <<: !include switch/restart.config.yaml

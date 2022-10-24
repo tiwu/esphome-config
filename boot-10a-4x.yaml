@@ -8,7 +8,7 @@ substitutions:
 packages:
   device_base: !include common/device_base.yaml
   wifi: !include common/wifi.yaml
-  
+
 esp8266:
   board: esp12e
   restore_from_flash: true
@@ -16,7 +16,7 @@ esp8266:
 ota:
   password: "113ff3b1c01ed6a1565e725fa27c1a79"
 
-wifi:  
+wifi:
   manual_ip:
     static_ip: 192.168.0.247
     gateway: 192.168.0.1
@@ -67,7 +67,7 @@ binary_sensor:
     on_press:
       then:
         - switch.toggle: ${lowername}_ry4
-    
+
 switch:
   - platform: gpio
     name: "${uppername} Relay 1"

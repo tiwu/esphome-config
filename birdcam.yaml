@@ -22,7 +22,7 @@ esp32:
 ota:
   password: "c6b7b20de01836079657380418dc76e8"
 
-wifi:  
+wifi:
   manual_ip:
     static_ip: 192.168.0.235
     gateway: 192.168.0.1
