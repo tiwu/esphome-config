@@ -13,8 +13,7 @@ esphome:
     then:
       - pulse_meter.set_total_pulses:
           id: ${lowername}_pulse_meter
-          value: !lambda return id(total_water).state * 2000;
-
+          value: !lambda return id(total_water) * 2000;
 
 esp8266:
   board: d1_mini
