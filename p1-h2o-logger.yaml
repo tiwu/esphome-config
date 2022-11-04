@@ -64,6 +64,7 @@ sensor:
 
 # Water meter
   - platform: pulse_meter
+    device_class: water
     id: ${lowername}_pulse_meter
     pin:
       number: 14
