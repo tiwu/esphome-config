@@ -40,6 +40,7 @@ button:
     name: 'Save to Flash'
     on_press:
       then:
+        - delay: 3s
         - lambda: !lambda global_preferences->sync();
 
 
@@ -64,7 +65,6 @@ sensor:
 
 # Water meter
   - platform: pulse_meter
-    device_class: water
     id: ${lowername}_pulse_meter
     pin:
       number: 14
@@ -73,15 +73,19 @@ sensor:
     timeout: 30s
     name: "Waterverbruik liters"
     icon: "mdi:water"
-    unit_of_measurement: 'l/min'
+    unit_of_measurement: 'l'
+    device_class: water
+    state_class: measurement
     accuracy_decimals: 1
     filters:
       # 4-digit = 1 pulse per 0.5L | https://www.2-wire.net/wp-content/uploads/2019/01/S02-Elster-manual.pdf
       - multiply: 0.5
     total:
       name: 'Water meterstand'
-      unit_of_measurement: 'm3'
+      unit_of_measurement: m3
       accuracy_decimals: 4
+      device_class: water
+      state_class: total_increasing
       filters:
         # 2000 puls/m3
         - lambda: !lambda |-
