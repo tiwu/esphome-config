@@ -69,14 +69,19 @@ sensor:
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 50ms
+    internal_filter: 50us
     timeout: 30s
     name: "Waterverbruik liters"
     icon: "mdi:water"
-    unit_of_measurement: 'l'
+    unit_of_measurement: 'l/min'
     device_class: water
     state_class: measurement
     accuracy_decimals: 1
+    on_raw_value:
+      then:
+        - logger.log: 
+            format: "pulse_meter counted  %.1f pulses"
+            args: [ 'x' ]
     filters:
       # 4-digit = 1 pulse per 0.5L | https://www.2-wire.net/wp-content/uploads/2019/01/S02-Elster-manual.pdf
       - multiply: 0.5
@@ -92,8 +97,3 @@ sensor:
             id(total_water) = x * 0.0005;
             ESP_LOGD("${lowername} water meterstand", "Meterstand: %f", id(total_water));
             return id(total_water);
-    on_raw_value:
-      then:
-        - logger.log: 
-            format: "pulse_meter counted  %.1f pulses"
-            args: [ 'x' ]
