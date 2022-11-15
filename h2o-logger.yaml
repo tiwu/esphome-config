@@ -1,7 +1,7 @@
 substitutions:
-  name: p1-h2o-logger
-  uppername: P1 H2O Logger
-  lowername: p1_h2o_logger
+  name: h2o-logger
+  uppername: H2O Logger
+  lowername: h2o_logger
   version: '1.1'
 
 packages:
@@ -13,7 +13,7 @@ esphome:
     then:
       - pulse_meter.set_total_pulses:
           id: ${lowername}_water_meter
-          value: !lambda return id(total_water) * 2000;
+          value: !lambda return id(total_water) * 2000.0;
 
 esp8266:
   board: d1_mini
@@ -35,12 +35,12 @@ button:
       then:
         - pulse_meter.set_total_pulses:
             id: ${lowername}_water_meter
-            value: !lambda return id(watermeter_input).state * 2000;
+            value: !lambda return id(watermeter_input).state * 2000.0;
   - platform: template
     name: 'Save to Flash'
     on_press:
       then:
-        - delay: 3s
+        - delay: 2s
         - lambda: !lambda global_preferences->sync();
 
 
@@ -69,26 +69,20 @@ sensor:
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 50us
+    internal_filter: 25us
     timeout: 30s
-    name: 'Water verbruik'
+    name: ${name}_water_verbruik
     icon: "mdi:water"
     unit_of_measurement: 'l/min'
     device_class: water
     state_class: measurement
     accuracy_decimals: 1
-    on_raw_value:
-      then:
-        - logger.log: 
-            format: "pulse_meter counted  %.1f pulses"
-            args: [ 'x' ]
     filters:
       # 4-digit = 1 pulse per 0.5L | https://www.2-wire.net/wp-content/uploads/2019/01/S02-Elster-manual.pdf
       - multiply: 0.5
     total:
-      name: 'Water meter stand'
-      id: ${lowername}_water_meter_stand
-      unit_of_measurement: m3
+      name: ${name}_water_meterstand
+      unit_of_measurement: 'm3'
       accuracy_decimals: 4
       device_class: water
       state_class: total_increasing
@@ -98,3 +92,8 @@ sensor:
             id(total_water) = x * 0.0005;
             ESP_LOGD("${lowername} water meterstand", "Meterstand: %f", id(total_water));
             return id(total_water);
+    on_raw_value:
+      then:
+        - logger.log: 
+            format: "pulse_meter counted  %.1f pulses"
+            args: [ 'x' ]
