@@ -12,7 +12,7 @@ esphome:
   on_boot:
     then:
       - pulse_meter.set_total_pulses:
-          id: ${lowername}_pulse_meter
+          id: ${lowername}_water_meter
           value: !lambda return id(total_water) * 2000;
 
 esp8266:
@@ -34,7 +34,7 @@ button:
     on_press:
       then:
         - pulse_meter.set_total_pulses:
-            id: ${lowername}_pulse_meter
+            id: ${lowername}_water_meter
             value: !lambda return id(watermeter_input).state * 2000;
   - platform: template
     name: 'Save to Flash'
@@ -65,13 +65,13 @@ sensor:
 
 # Water meter
   - platform: pulse_meter
-    id: ${lowername}_pulse_meter
+    id: ${lowername}_water_meter
     pin:
       number: 14
       mode: INPUT_PULLUP
     internal_filter: 50us
     timeout: 30s
-    name: "Waterverbruik liters"
+    name: 'Water verbruik'
     icon: "mdi:water"
     unit_of_measurement: 'l/min'
     device_class: water
@@ -87,6 +87,7 @@ sensor:
       - multiply: 0.5
     total:
       name: 'Water meterstand'
+      id: ${lowername}_water_meterstand
       unit_of_measurement: m3
       accuracy_decimals: 4
       device_class: water
