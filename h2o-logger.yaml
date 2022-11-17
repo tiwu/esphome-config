@@ -69,7 +69,7 @@ sensor:
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 25us
+    internal_filter: 5ms
     timeout: 30s
     name: ${name}_water_verbruik
     icon: "mdi:water"
@@ -82,7 +82,7 @@ sensor:
       - multiply: 0.5
     total:
       name: ${name}_water_meterstand
-      unit_of_measurement: 'm3'
+      unit_of_measurement: m³
       accuracy_decimals: 4
       device_class: water
       state_class: total_increasing
