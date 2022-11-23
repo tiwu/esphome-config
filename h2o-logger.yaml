@@ -69,7 +69,7 @@ sensor:
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 50ms
+    internal_filter: 75ms
     timeout: 1min
     name: ${name}_water_verbruik
     icon: "mdi:water"
