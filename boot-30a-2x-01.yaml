@@ -13,9 +13,6 @@ esp8266:
   board: esp01_1m
   restore_from_flash: true
 
-ota:
-  password: "d03d1ffd17e573ad6f6d88881b463486"
-
 binary_sensor:
   - platform: gpio
     pin:
