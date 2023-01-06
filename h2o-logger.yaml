@@ -2,7 +2,7 @@ substitutions:
   name: h2o-logger
   uppername: H2O Logger
   lowername: h2o_logger
-  version: '1.1'
+  version: '1.2'
 
 packages:
   device_base: !include common/device_base.yaml
@@ -40,7 +40,7 @@ button:
     name: 'Save to Flash'
     on_press:
       then:
-        - delay: 2s
+        - delay: 1s
         - lambda: !lambda global_preferences->sync();
 
 
@@ -69,7 +69,7 @@ sensor:
     pin:
       number: 14
       mode: INPUT_PULLUP
-    internal_filter: 250ms
+    internal_filter: 250us
     timeout: 1min
     name: ${name}_water_verbruik
     icon: "mdi:water"
@@ -92,8 +92,3 @@ sensor:
             id(total_water) = x * 0.0005;
             ESP_LOGD("${lowername} water meterstand", "Meterstand: %f", id(total_water));
             return id(total_water);
-    on_raw_value:
-      then:
-        - logger.log: 
-            format: "pulse_meter counted  %.1f pulses"
-            args: [ 'x' ]
