@@ -1,0 +1,12 @@
+substitutions:
+  name: p1-dongle-pro
+packages:
+  smartstuff.p1_dongle_pro: github://mhendriks/esphome-p1/p1-dongle-pro.yaml@main
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
