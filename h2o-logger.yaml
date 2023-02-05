@@ -1,5 +1,6 @@
 substitutions:
   name: h2o-logger
+  device_description: "H2O logger module for Water meter reading and temp/hum monitoring"
   uppername: H2O Logger
   lowername: h2o_logger
   version: '1.3'

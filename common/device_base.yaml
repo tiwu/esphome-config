@@ -1,14 +1,10 @@
 esphome:
-  # This will allow for (future) project identification,
-  # configuration and updates.
   project:
     name: "tiwu.${name}"
     version: "${version}"
-
   name: "${name}"
-  # Automatically add the mac address to the name
-  # so you can use a single firmware for all devices
-  #name_add_mac_suffix: true
+  comment: "${device_description}"
+  name_add_mac_suffix: false
   build_path: ./build/${name}
 
 # Enable logging

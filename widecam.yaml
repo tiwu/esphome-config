@@ -1,6 +1,7 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: widecam
+  device_description: "ESP32 CAM module with wide lens"
   uppername: WideCam
   lowername: widecam
   version: '1.1'

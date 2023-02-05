@@ -1,6 +1,7 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: irco
+  device_description: "Irco IR module for AC control and temp/hum monitoring"
   uppername: Irco
   lowername: irco
   version: '1.0'

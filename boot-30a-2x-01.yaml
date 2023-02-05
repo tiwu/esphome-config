@@ -1,6 +1,7 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: boot-30a-2x-01
+  device_description: "Boot 2x 30A Relay board"
   uppername: Boot 30A 2x 01
   lowername: boot_30a_2x_01
   version: '1.0'
