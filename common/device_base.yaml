@@ -21,7 +21,7 @@ ota:
 
 # Text sensors with general information
 text_sensor:
-  - <<: !include text_sensor/uptime.config.yaml
+  # - <<: !include text_sensor/uptime.config.yaml
   - <<: !include text_sensor/wifi_info.config.yaml
 
 # Restart device remotely
@@ -30,7 +30,7 @@ switch:
 
 # WiFi Signal + Uptime sensor
 sensor:
-  - <<: !include sensor/uptime.config.yaml
+  # - <<: !include sensor/uptime.config.yaml
   - <<: !include sensor/wifi_signal.config.yaml
 
 # Connection Status
