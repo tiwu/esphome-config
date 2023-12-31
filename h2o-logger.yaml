@@ -1,8 +1,8 @@
 substitutions:
   name: h2o-logger
-  device_description: "H2O logger module for Water meter reading and temp/hum monitoring"
-  uppername: H2O Logger
   lowername: h2o_logger
+  friendly_name: H2O Logger
+  device_description: "H2O logger module for Water meter reading and temp/hum monitoring"
   version: '1.3'
 
 packages:
@@ -32,6 +32,7 @@ globals:
 button:
   - platform: template
     name: 'Waterverbruik zet stand'
+    entity_category: config
     on_press:
       then:
         - pulse_meter.set_total_pulses:
@@ -39,6 +40,7 @@ button:
             value: !lambda return id(watermeter_input).state * 10000.0;
   - platform: template
     name: 'Save to Flash'
+    entity_category: config
     on_press:
       then:
         - delay: 1s
