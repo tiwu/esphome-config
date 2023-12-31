@@ -25,8 +25,8 @@ text_sensor:
   - <<: !include text_sensor/wifi_info.config.yaml
 
 # Restart device remotely
-switch:
-  - <<: !include switch/restart.config.yaml
+button:
+  - <<: !include button/restart.config.yaml
 
 # WiFi Signal + Uptime sensor
 sensor:

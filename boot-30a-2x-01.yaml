@@ -14,6 +14,9 @@ esp8266:
   board: esp01_1m
   restore_from_flash: true
 
+preferences:
+  flash_write_interval: 20min
+
 binary_sensor:
   - platform: gpio
     pin:
@@ -69,6 +72,7 @@ switch:
     name: "${uppername} Relay 1"
     pin: GPIO14
     id: ${lowername}_ry_1
+    restore_mode: RESTORE_DEFAULT_OFF
     on_turn_on:
     - output.turn_on: "${lowername}_L1_pin"
     on_turn_off:
@@ -77,6 +81,7 @@ switch:
     name: "${uppername} Relay 2"
     pin: GPIO12
     id: ${lowername}_ry_2
+    restore_mode: RESTORE_DEFAULT_OFF
     on_turn_on:
     - output.turn_on: "${lowername}_L2_pin"
     on_turn_off:
@@ -113,3 +118,11 @@ light:
     name: "${uppername} Blue LED"
     output: ${lowername}_blue_led_pin
     id: ${lowername}_blue_led
+
+button:
+  - platform: template
+    name: '${uppername} Save to Flash'
+    on_press:
+      then:
+        - delay: 1s
+        - lambda: !lambda global_preferences->sync();
