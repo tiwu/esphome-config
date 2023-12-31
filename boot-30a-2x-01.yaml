@@ -1,9 +1,9 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: boot-30a-2x-01
-  device_description: "Boot 2x 30A Relay board"
-  uppername: Boot 30A 2x 01
   lowername: boot_30a_2x_01
+  friendly_name: 30A Relay Board 01
+  device_description: "Dual 30A Relay Board 01"
   version: '1.2'
 
 packages:
@@ -25,7 +25,7 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "${uppername} IO 00 (B1 + Onboard Button)"
+    name: "IO 00 (B1 + Onboard Button)"
     entity_category: diagnostic
     on_press:
       then:
@@ -37,7 +37,7 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "${uppername} IO 04 (B2)"
+    name: "IO 04 (B2)"
     entity_category: diagnostic
     on_press:
       then:
@@ -47,20 +47,20 @@ binary_sensor:
 # # (https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/)
 #
 #   - platform: gpio
-#     name: "${uppername} IO 01"
+#     name: "IO 01"
 #     pin:
 #       number: GPIO01
 #       mode:
 #         input: true
 #   - platform: gpio
-#     name: "${uppername} IO 03"
+#     name: "IO 03"
 #     pin:
 #       number: GPIO03
 #       mode:
 #         input: true
 #       inverted: true
 #   - platform: gpio
-#     name: "${uppername} IO 15"
+#     name: "IO 15"
 #     pin:
 #       number: GPIO15
 #       mode:
@@ -71,7 +71,7 @@ binary_sensor:
 # linking relay switch state with it's led output
 switch:
   - platform: gpio
-    name: "${uppername} Relay 1"
+    name: "Relay 1"
     pin: GPIO14
     id: ${lowername}_ry_1
     restore_mode: RESTORE_DEFAULT_OFF
@@ -80,7 +80,7 @@ switch:
     on_turn_off:
     - output.turn_off: "${lowername}_L1_pin"
   - platform: gpio
-    name: "${uppername} Relay 2"
+    name: "Relay 2"
     pin: GPIO12
     id: ${lowername}_ry_2
     restore_mode: RESTORE_DEFAULT_OFF
@@ -113,19 +113,19 @@ output:
 
 light:
   - platform: binary
-    name: "${uppername} Onboard LED"
+    name: "Onboard LED"
     output: ${lowername}_onboard_led_pin
     id: ${lowername}_onboard_led
     entity_category: config
   - platform: binary
-    name: "${uppername} Blue LED"
+    name: "Blue LED"
     output: ${lowername}_blue_led_pin
     id: ${lowername}_blue_led
     entity_category: config
 
 button:
   - platform: template
-    name: '${uppername} Save to Flash'
+    name: 'Save to Flash'
     entity_category: diagnostic
     on_press:
       then:

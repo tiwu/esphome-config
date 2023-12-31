@@ -1,13 +1,13 @@
   - platform: wifi_info
     ip_address:
-      name: "${uppername} IP"
+      name: "IP"
       entity_category: diagnostic
     ssid:
-      name: "${uppername} SSID"
+      name: "SSID"
       entity_category: diagnostic
     bssid:
-      name: "${uppername} BSSID"
+      name: "BSSID"
       entity_category: diagnostic
     mac_address:
-      name: "${uppername} MAC"
+      name: "MAC"
       entity_category: diagnostic

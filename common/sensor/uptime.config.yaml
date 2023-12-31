@@ -1,6 +1,6 @@
 
   - platform: uptime
-    id: ${lowername}_uptime_s
+    id: uptime_s
     update_interval: 120s
     on_raw_value:
       then:

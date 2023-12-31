@@ -3,6 +3,7 @@ esphome:
     name: "tiwu.${name}"
     version: "${version}"
   name: "${name}"
+  friendly_name: "${friendly_name}"
   comment: "${device_description}"
   name_add_mac_suffix: false
   build_path: ./build/${name}
