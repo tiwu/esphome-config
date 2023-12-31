@@ -25,7 +25,7 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "IO 00 (B1 + Onboard Button)"
+    name: "Button 01"
     entity_category: diagnostic
     on_press:
       then:
@@ -37,7 +37,7 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "IO 04 (B2)"
+    name: "Button 02"
     entity_category: diagnostic
     on_press:
       then:

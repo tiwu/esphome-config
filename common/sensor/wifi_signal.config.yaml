@@ -3,3 +3,4 @@
     name: "WiFi Signal"
     update_interval: 120s
     entity_category: diagnostic
+    entity_registry_visible_default: false

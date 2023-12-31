@@ -1,4 +1,4 @@
   - platform: restart
     name: "Restart"
     entity_category: config
-
+    entity_registry_visible_default: false
