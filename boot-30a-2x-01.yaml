@@ -126,7 +126,7 @@ light:
 button:
   - platform: template
     name: 'Save to Flash'
-    entity_category: diagnostic
+    entity_category: config
     on_press:
       then:
         - delay: 1s

@@ -1,3 +1,4 @@
   - platform: restart
     name: "Restart"
-    entity_category: diagnostic
+    entity_category: config
+
