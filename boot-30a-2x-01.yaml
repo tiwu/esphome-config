@@ -4,7 +4,7 @@ substitutions:
   device_description: "Boot 2x 30A Relay board"
   uppername: Boot 30A 2x 01
   lowername: boot_30a_2x_01
-  version: '1.0'
+  version: '1.1'
 
 packages:
   device_base: !include common/device_base.yaml
@@ -22,7 +22,10 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "${uppername} Onboard Button"
+    name: "${uppername} IO 00 (B1 + Onboard Button)"
+    on_press:
+      then:
+        - switch.toggle: ${lowername}_ry_1
   - platform: gpio
     pin:
       number: GPIO4
@@ -30,55 +33,54 @@ binary_sensor:
         input: true
         pullup: true
       inverted: true
-    name: "${uppername} Button 04"
-  - platform: gpio
-    pin:
-      number: GPIO15
-      mode:
-        input: true
-        pullup: true
-      inverted: false
-    name: "${uppername} Button 15"
-  - platform: gpio
-    pin:
-      number: GPIO13
-      mode:
-        input: true
-        pullup: true
-      inverted: true
-    name: "${uppername} Button 13"
+    name: "${uppername} IO 04 (B2)"
     on_press:
       then:
-        - switch.toggle: ${lowername}_ry_1
-  - platform: gpio
-    pin:
-      number: GPIO16
-      mode:
-        input: true
-    name: "${uppername} Button 16"
-  - platform: gpio
-    pin:
-      number: GPIO01
-      mode:
-        input: true
-    name: "${uppername} Button 01"
-  - platform: gpio
-    pin:
-      number: GPIO03
-      mode:
-        input: true
-      inverted: true
-    name: "${uppername} Button 03"
+        - switch.toggle: ${lowername}_ry_2
 
+# # GPIO pins 1, 3 and 15 are still available, as are 2 and 5 but linked to leds
+# # (https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/)
+#
+#   - platform: gpio
+#     name: "${uppername} IO 01"
+#     pin:
+#       number: GPIO01
+#       mode:
+#         input: true
+#   - platform: gpio
+#     name: "${uppername} IO 03"
+#     pin:
+#       number: GPIO03
+#       mode:
+#         input: true
+#       inverted: true
+#   - platform: gpio
+#     name: "${uppername} IO 15"
+#     pin:
+#       number: GPIO15
+#       mode:
+#         input: true
+#         pullup: true
+#       inverted: false
+
+# linking relay switch state with it's led output
 switch:
   - platform: gpio
     name: "${uppername} Relay 1"
     pin: GPIO14
     id: ${lowername}_ry_1
+    on_turn_on:
+    - output.turn_on: "${lowername}_L1_pin"
+    on_turn_off:
+    - output.turn_off: "${lowername}_L1_pin"
   - platform: gpio
     name: "${uppername} Relay 2"
     pin: GPIO12
     id: ${lowername}_ry_2
+    on_turn_on:
+    - output.turn_on: "${lowername}_L2_pin"
+    on_turn_off:
+    - output.turn_off: "${lowername}_L2_pin"
 
 output:
   # onboard led
@@ -86,10 +88,20 @@ output:
     id: ${lowername}_onboard_led_pin
     pin: GPIO02
     inverted: true
-  # blue led
+  # external blue led
   - platform: gpio
     id: ${lowername}_blue_led_pin
     pin: GPIO05
+    inverted: true
+  # Button 02 LED pin
+  - platform: gpio
+    id: "${lowername}_L2_pin"
+    pin: GPIO13
+    inverted: true
+  # Button 01 LED pin
+  - platform: gpio
+    id: "${lowername}_L1_pin"
+    pin: GPIO16
     inverted: true
 
 light:
