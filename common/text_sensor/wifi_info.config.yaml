@@ -2,16 +2,12 @@
     ip_address:
       name: "IP"
       entity_category: diagnostic
-      entity_registry_visible_default: false
     ssid:
       name: "SSID"
       entity_category: diagnostic
-      entity_registry_visible_default: false
     bssid:
       name: "BSSID"
       entity_category: diagnostic
-      entity_registry_visible_default: false
     mac_address:
       name: "MAC"
       entity_category: diagnostic
-      entity_registry_visible_default: false
