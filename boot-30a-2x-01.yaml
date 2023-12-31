@@ -4,7 +4,7 @@ substitutions:
   device_description: "Boot 2x 30A Relay board"
   uppername: Boot 30A 2x 01
   lowername: boot_30a_2x_01
-  version: '1.1'
+  version: '1.2'
 
 packages:
   device_base: !include common/device_base.yaml
@@ -26,6 +26,7 @@ binary_sensor:
         pullup: true
       inverted: true
     name: "${uppername} IO 00 (B1 + Onboard Button)"
+    entity_category: diagnostic
     on_press:
       then:
         - switch.toggle: ${lowername}_ry_1
@@ -37,6 +38,7 @@ binary_sensor:
         pullup: true
       inverted: true
     name: "${uppername} IO 04 (B2)"
+    entity_category: diagnostic
     on_press:
       then:
         - switch.toggle: ${lowername}_ry_2
@@ -114,14 +116,17 @@ light:
     name: "${uppername} Onboard LED"
     output: ${lowername}_onboard_led_pin
     id: ${lowername}_onboard_led
+    entity_category: config
   - platform: binary
     name: "${uppername} Blue LED"
     output: ${lowername}_blue_led_pin
     id: ${lowername}_blue_led
+    entity_category: config
 
 button:
   - platform: template
     name: '${uppername} Save to Flash'
+    entity_category: diagnostic
     on_press:
       then:
         - delay: 1s

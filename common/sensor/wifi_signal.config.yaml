@@ -2,3 +2,4 @@
   - platform: wifi_signal
     name: "${uppername} WiFi Signal"
     update_interval: 120s
+    entity_category: diagnostic

@@ -1,2 +1,3 @@
   - platform: status
     name: "${uppername} Status"
+    entity_category: diagnostic
