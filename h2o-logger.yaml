@@ -36,7 +36,7 @@ button:
     on_press:
       then:
         - pulse_meter.set_total_pulses:
-            id: ${lowername}_water_meter
+            id: water_meter
             value: !lambda return id(watermeter_input).state * 10000.0;
   - platform: template
     name: 'Save to Flash'
