@@ -9,6 +9,12 @@ packages:
   device_base: !include common/device_base.yaml
   wifi: !include common/wifi.yaml
 
+wifi:
+  manual_ip:
+    static_ip: 192.168.0.169
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
 esphome:
   on_boot:
     then:
@@ -76,8 +82,8 @@ sensor:
     timeout: 1min
     name: water_verbruik
     icon: "mdi:water"
-    unit_of_measurement: 'L'
-    device_class: volume
+    unit_of_measurement: 'L/min'
+    device_class: volume_flow_rate
     accuracy_decimals: 1
     filters:
       # 4-digit = 1 pulse per 0.5L | https://www.2-wire.net/wp-content/uploads/2019/01/S02-Elster-manual.pdf

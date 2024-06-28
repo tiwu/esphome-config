@@ -1,9 +1,10 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: boot-10a-4x
+  lowername: boot_10a_4x
+  friendly_name: Boot 4x 10A Relay Board
   device_description: "Boot 4x 10A Relay board"
   uppername: Boot 10A 4x
-  lowername: boot_10a_4x
   version: '1.0'
 
 packages:
@@ -15,6 +16,7 @@ esp8266:
   restore_from_flash: true
 
 ota:
+  platform: esphome
   password: "113ff3b1c01ed6a1565e725fa27c1a79"
 
 binary_sensor:

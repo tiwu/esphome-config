@@ -13,11 +13,11 @@ packages:
 esp8266:
   board: esp12e
 
-# wifi:
-#   manual_ip:
-#     static_ip: 192.168.0.105
-#     gateway: 192.168.0.1
-#     subnet: 255.255.255.0
+wifi:
+  manual_ip:
+    static_ip: 192.168.0.141
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
 
 # control LED connected to ESP pwm
 light:

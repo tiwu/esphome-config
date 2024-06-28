@@ -18,7 +18,8 @@ captive_portal:
 
 # Setup OTA
 ota:
-  password: !secret ota_password
+  - platform: esphome
+    password: !secret ota_password
 
 # Text sensors with general information
 text_sensor:

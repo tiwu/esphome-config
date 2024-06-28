@@ -1,10 +1,11 @@
 # These substitutions allow the end user to override certain values
 substitutions:
   name: widecam
+  lowername: widecam
+  friendly_name: WideCam
   device_description: "ESP32 CAM module with wide lens"
   uppername: WideCam
-  lowername: widecam
-  version: '1.1'
+  version: '1.2'
 
   # settings for espcam package
   resolution: 1024x768
@@ -21,4 +22,5 @@ esp32:
   board: esp32cam
 
 ota:
+  platform: esphome
   password: "c6b7b20de01836079657380418dc76e8"
