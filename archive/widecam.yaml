@@ -1,0 +1,26 @@
+# These substitutions allow the end user to override certain values
+substitutions:
+  name: widecam
+  lowername: widecam
+  friendly_name: WideCam
+  device_description: "ESP32 CAM module with wide lens"
+  uppername: WideCam
+  version: '1.2'
+
+  # settings for espcam package
+  resolution: 1024x768
+  vflip: 'false'
+  hflip: 'false'
+  effect: grayscale   # grayscale/none
+
+packages:
+  device_base: !include common/device_base.yaml
+  wifi: !include common/wifi.yaml
+  cam: !include common/espcam.yaml
+
+esp32:
+  board: esp32cam
+
+ota:
+  platform: esphome
+  password: "c6b7b20de01836079657380418dc76e8"
